@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://d1qdejj7eyly8" path="res://RtsCamera.tscn" id="1_pe05s"]
 [ext_resource type="PackedScene" uid="uid://qf4qmx11exjd" path="res://Unidade.tscn" id="2_ubi47"]
+[ext_resource type="PackedScene" uid="uid://cupngbht3xv5b" path="res://Arvore.tscn" id="3_gejyx"]
 [ext_resource type="Script" uid="uid://d1q5misfym7sb" path="res://hud.gd" id="3_xywc0"]
+[ext_resource type="PackedScene" uid="uid://b7rlkjxnhd1iy" path="res://CentroDaCidade.tscn" id="4_5yunf"]
 
 [sub_resource type="Environment" id="Environment_52r7t"]
 background_mode = 2
@@ -38,7 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, -10)
 mesh = SubResource("BoxMesh_52r7t")
 
 [node name="Unidade" parent="." unique_id=849595556 groups=["unidades_jogador"] instance=ExtResource("2_ubi47")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8187342, 0.15434504, 0.059424877)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6874994, 0.02590368, -0.06765875)
 
 [node name="Unidade2" parent="." unique_id=763241661 groups=["unidades_jogador"] instance=ExtResource("2_ubi47")]
 
@@ -47,6 +49,42 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2336845, 0.045274675, 0.37
 
 [node name="Unidade4" parent="." unique_id=1504082689 groups=["unidades_jogador"] instance=ExtResource("2_ubi47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.485558, -0.005960822, -0.27112603)
+
+[node name="Arvore" parent="." unique_id=904657236 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 3.4340932, -0.016568542, 0.2480321)
+
+[node name="Arvore2" parent="." unique_id=193256493 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 5.8999004, -0.26389158, 0.2480321)
+
+[node name="Arvore3" parent="." unique_id=1924939191 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 3.4340932, -0.016568542, 2.2666068)
+
+[node name="Arvore4" parent="." unique_id=517922314 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 8.78721, -0.016568542, 0.2480321)
+
+[node name="Arvore5" parent="." unique_id=908570851 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 11.8227215, -0.036438346, 0.2480321)
+
+[node name="Arvore6" parent="." unique_id=1688604240 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 5.0326157, 0.26506925, 8.390846)
+
+[node name="Arvore7" parent="." unique_id=76187194 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, -8.337357, 0.18349272, 0.2480321)
+
+[node name="Arvore8" parent="." unique_id=117912466 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, -5.916172, 0.2124961, 0.2480321)
+
+[node name="Arvore9" parent="." unique_id=1683087724 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 19.119404, -0.08023763, 0.2480321)
+
+[node name="Arvore10" parent="." unique_id=1329803136 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, -13.945472, -0.31202364, -3.2693863)
+
+[node name="Arvore11" parent="." unique_id=1713037300 instance=ExtResource("3_gejyx")]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 3.4340932, -0.41498744, -15.776093)
+
+[node name="CentroDaCidade" parent="." unique_id=707274122 instance=ExtResource("4_5yunf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0191584, 0.009028196, -9.439905)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2132703628]
 navigation_mesh = SubResource("NavigationMesh_52r7t")

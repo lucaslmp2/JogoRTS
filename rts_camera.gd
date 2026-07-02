@@ -54,23 +54,49 @@ func handle_mouse_edge_input(delta: float) -> void:
 	if input_dir != Vector3.ZERO:
 		input_dir = input_dir.normalized()
 		global_translate(input_dir * move_speed * delta)
-
 func _unhandled_input(event: InputEvent) -> void:
+	# 1. TRATA APENAS EVENTOS DE CLIQUES E BOTÕES DO MOUSE
 	if event is InputEventMouseButton:
 		# Controle de Zoom existente
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			target_zoom = max(min_zoom, target_zoom - zoom_speed)
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			target_zoom = min(max_zoom, target_zoom + zoom_speed)
-# Clique com o Botão Direito para MOVER (Apenas as selecionadas!)
+			
+		# Clique com o Botão Direito para Agir (Mover ou Coletar)
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			var target_position = get_mouse_3d_position()
-			if target_position != Vector3.ZERO:
+			var current_mouse_pos = get_viewport().get_mouse_position()
+			var ray_origin = camera.project_ray_origin(current_mouse_pos)
+			var ray_end = ray_origin + camera.project_ray_normal(current_mouse_pos) * 2000.0
+			
+			var space_state = get_world_3d().direct_space_state
+			var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+			var result = space_state.intersect_ray(query)
+			
+			if result:
+				var objeto_clicado = result.collider
+				var ponto_clicado = result.position
+				
 				for unidade in get_tree().get_nodes_in_group("unidades_jogador"):
-					# Checa se a propriedade existe E se a unidade está marcada como selecionada
 					if "is_selected" in unidade and unidade.is_selected:
-						unidade.set_movement_target(target_position)
-		# Clique com o Botão Esquerdo para SELECIONAR (Arrastar)
+						# Se clicou em uma árvore, manda coletar normalmente
+						if objeto_clicado.is_in_group("recursos"):
+							if unidade.has_method("definir_alvo_coleta"):
+								unidade.definir_alvo_coleta(objeto_clicado)
+						# SE CLICOU NO CHÃO: Limpa os alvos e para o modo automático!
+						else:
+							if unidade.has_method("limpar_alvo_coleta"):
+								unidade.limpar_alvo_coleta()
+							
+							# Desliga os estados internos de trabalho que causavam o loop
+							if "modo_trabalho" in unidade:
+								unidade.modo_trabalho = false
+							if "indo_para_base" in unidade:
+								unidade.indo_para_base = false
+								
+							unidade.set_movement_target(ponto_clicado)
+		
+		# Clique com o Botão Esquerdo para Selecionar (Arrastar) - AGORA NO LUGAR CERTO!
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				dragging = true
@@ -81,9 +107,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				hud.end_box()
 				select_units_in_box(drag_start, event.position)
 
-	if event is InputEventMouseMotion and dragging:
-		hud.update_box(event.position)
-
+	# 2. TRATA APENAS EVENTOS DE MOVIMENTAÇÃO DO MOUSE (Totalmente isolado fora do bloco acima)
+	elif event is InputEventMouseMotion:
+		if dragging:
+			hud.update_box(event.position)
 # Função mágica que descobre quem está dentro do retângulo arrastado
 func select_units_in_box(start: Vector2, end: Vector2) -> void:
 	# Se o clique foi muito rápido (um clique simples), define uma área mínima

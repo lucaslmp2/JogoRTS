@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b7rlkjxnhd1iy"]
+
+[ext_resource type="Script" uid="uid://cr2s7btm5tjke" path="res://centro_da_cidade.gd" id="1_h5mum"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_52r7t"]
+size = Vector3(3, 2, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_52r7t"]
+size = Vector3(3.00708, 2.0239868, 3.0211105)
+
+[node name="CentroDaCidade" type="StaticBody3D" unique_id=707274122 groups=["bases"]]
+script = ExtResource("1_h5mum")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2134592673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_52r7t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=288475519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012207031, 0.9900818, 0.0070762634)
+shape = SubResource("BoxShape3D_52r7t")
