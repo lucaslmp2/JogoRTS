@@ -10,7 +10,10 @@ extends Node3D
 var min_zoom: float = 5.0
 var max_zoom: float = 30.0
 var target_zoom: float = 15.0
-
+# Variáveis para a caixa de seleção
+var dragging: bool = false
+var drag_start: Vector2 = Vector2.ZERO
+@onready var hud: Control = $"../CanvasLayer/HUD" # Certifique-se que o caminho até o nó HUD está correto
 func _process(delta: float) -> void:
 	handle_keyboard_input(delta)
 	handle_mouse_edge_input(delta)
@@ -52,20 +55,54 @@ func handle_mouse_edge_input(delta: float) -> void:
 		input_dir = input_dir.normalized()
 		global_translate(input_dir * move_speed * delta)
 
-# 3. Controle ÚNICO de Input (Zoom e Clique de Movimentação)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
+		# Controle de Zoom existente
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			target_zoom = max(min_zoom, target_zoom - zoom_speed)
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			target_zoom = min(max_zoom, target_zoom + zoom_speed)
-			
-		# Detectar clique com o Botão Direito para mover a unidade
+# Clique com o Botão Direito para MOVER (Apenas as selecionadas!)
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			var target_position = get_mouse_3d_position()
 			if target_position != Vector3.ZERO:
-				get_tree().call_group("unidades_jogador", "set_movement_target", target_position)
+				for unidade in get_tree().get_nodes_in_group("unidades_jogador"):
+					# Checa se a propriedade existe E se a unidade está marcada como selecionada
+					if "is_selected" in unidade and unidade.is_selected:
+						unidade.set_movement_target(target_position)
+		# Clique com o Botão Esquerdo para SELECIONAR (Arrastar)
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				dragging = true
+				drag_start = event.position
+				hud.start_box(drag_start)
+			else:
+				dragging = false
+				hud.end_box()
+				select_units_in_box(drag_start, event.position)
 
+	if event is InputEventMouseMotion and dragging:
+		hud.update_box(event.position)
+
+# Função mágica que descobre quem está dentro do retângulo arrastado
+func select_units_in_box(start: Vector2, end: Vector2) -> void:
+	# Se o clique foi muito rápido (um clique simples), define uma área mínima
+	if start.distance_to(end) < 5:
+		end = start + Vector2(5, 5)
+		start = start - Vector2(5, 5)
+		
+	var box = Rect2(start, end - start).abs()
+	
+	# Passa por todas as unidades do mapa e checa se a posição de tela delas está no retângulo
+	for unidade in get_tree().get_nodes_in_group("unidades_jogador"):
+		var screen_pos = camera.unproject_position(unidade.global_position)
+		
+		if box.has_point(screen_pos):
+			unidade.select()
+		else:
+			# Se clicou fora ou arrastou fora, limpa a seleção anterior
+			if not Input.is_key_pressed(KEY_SHIFT): # Segurar SHIFT permite somar seleções
+				unidade.deselect()
 # 4. Suavização do Zoom
 func handle_zoom(delta: float) -> void:
 	camera.position.y = lerp(camera.position.y, target_zoom, 10.0 * delta)

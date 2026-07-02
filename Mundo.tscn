@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d1qdejj7eyly8" path="res://RtsCamera.tscn" id="1_pe05s"]
 [ext_resource type="PackedScene" uid="uid://qf4qmx11exjd" path="res://Unidade.tscn" id="2_ubi47"]
+[ext_resource type="Script" uid="uid://d1q5misfym7sb" path="res://hud.gd" id="3_xywc0"]
 
 [sub_resource type="Environment" id="Environment_52r7t"]
 background_mode = 2
@@ -37,6 +38,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, -10)
 mesh = SubResource("BoxMesh_52r7t")
 
 [node name="Unidade" parent="." unique_id=849595556 groups=["unidades_jogador"] instance=ExtResource("2_ubi47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8187342, 0.15434504, 0.059424877)
+
+[node name="Unidade2" parent="." unique_id=763241661 groups=["unidades_jogador"] instance=ExtResource("2_ubi47")]
+
+[node name="Unidade3" parent="." unique_id=1942994576 groups=["unidades_jogador"] instance=ExtResource("2_ubi47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2336845, 0.045274675, 0.3743167)
+
+[node name="Unidade4" parent="." unique_id=1504082689 groups=["unidades_jogador"] instance=ExtResource("2_ubi47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.485558, -0.005960822, -0.27112603)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2132703628]
 navigation_mesh = SubResource("NavigationMesh_52r7t")
@@ -48,3 +58,13 @@ mesh = SubResource("PlaneMesh_52r7t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Chao" unique_id=1706528885]
 shape = SubResource("BoxShape3D_52r7t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2098663534]
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=410587075]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("3_xywc0")

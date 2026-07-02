@@ -4,6 +4,8 @@ extends CharacterBody3D
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 
+var is_selected: bool = false
+
 func _ready() -> void:
 	# Evita que a unidade tente se mover logo no primeiro frame antes do mapa carregar
 	actor_setup.call_deferred()
@@ -13,7 +15,7 @@ func actor_setup():
 	await Engine.get_main_loop().process_frame
 	set_movement_target(global_position)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if navigation_agent.is_navigation_finished():
 		return
 
@@ -27,7 +29,13 @@ func _physics_process(delta: float) -> void:
 	velocity = new_velocity
 	move_and_slide()
 
-# Esta função será chamada pela nossa câmera/controlador para mandar a unidade andar
+# Esta função é chamada pela câmera para mandar a unidade andar
 func set_movement_target(movement_target: Vector3) -> void:
-	# Correção: Na Godot 4, alteramos a propriedade 'target_position' diretamente
 	navigation_agent.target_position = movement_target
+
+func select() -> void:
+	is_selected = true
+	print("Unidade selecionada: ", name)
+
+func deselect() -> void:
+	is_selected = false
