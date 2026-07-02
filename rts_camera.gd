@@ -52,20 +52,38 @@ func handle_mouse_edge_input(delta: float) -> void:
 		input_dir = input_dir.normalized()
 		global_translate(input_dir * move_speed * delta)
 
-# 3. Controle de Zoom (Roda do Mouse)
+# 3. Controle ÚNICO de Input (Zoom e Clique de Movimentação)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			target_zoom = max(min_zoom, target_zoom - zoom_speed)
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			target_zoom = min(max_zoom, target_zoom + zoom_speed)
+			
+		# Detectar clique com o Botão Direito para mover a unidade
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			var target_position = get_mouse_3d_position()
+			if target_position != Vector3.ZERO:
+				get_tree().call_group("unidades_jogador", "set_movement_target", target_position)
 
+# 4. Suavização do Zoom
 func handle_zoom(delta: float) -> void:
-	# Suaviza o zoom alterando a altura (Y) e a distância (Z) da câmera em relação ao pivot
 	camera.position.y = lerp(camera.position.y, target_zoom, 10.0 * delta)
 	camera.position.z = lerp(camera.position.z, target_zoom, 10.0 * delta)
 	
-	# Dinâmica de ângulo: Quanto mais perto, mais inclinada para ver os detalhes. 
-	# Quanto mais longe, mais vertical para ver o campo de batalha.
 	var angle = remap(camera.position.y, min_zoom, max_zoom, -35.0, -60.0)
 	camera.rotation_degrees.x = lerp(camera.rotation_degrees.x, angle, 10.0 * delta)
+
+# 5. Função auxiliar de Raycasting para pegar a posição do mouse no cenário 3D
+func get_mouse_3d_position() -> Vector3:
+	var mouse_pos = get_viewport().get_mouse_position()
+	var ray_origin = camera.project_ray_origin(mouse_pos)
+	var ray_end = ray_origin + camera.project_ray_normal(mouse_pos) * 2000.0
+	
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	var result = space_state.intersect_ray(query)
+	
+	if result:
+		return result.position
+	return Vector3.ZERO

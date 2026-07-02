@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://qf4qmx11exjd"]
+
+[ext_resource type="Script" uid="uid://cg6ie7np50k8h" path="res://unidade.gd" id="1_1rqxa"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_52r7t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_52r7t"]
+height = 1.9794922
+
+[node name="Unidade" type="CharacterBody3D" unique_id=849595556]
+script = ExtResource("1_1rqxa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=344383260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_52r7t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1960266730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9946289, 0)
+shape = SubResource("CapsuleShape3D_52r7t")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1138259279]
