@@ -1,0 +1,10 @@
+# Ignorar pasta de cache e importação da Godot 4
+.godot/
+
+# Ignorar exports automáticos (caso crie no futuro)
+export_presets.cfg
+builds/
+
+# Arquivos de sistema comuns
+.DS_Store
+Thumbs.db
