@@ -19,3 +19,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9946289, 0)
 shape = SubResource("CapsuleShape3D_52r7t")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1138259279]
+avoidance_enabled = true

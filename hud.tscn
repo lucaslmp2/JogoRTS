@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://ddgwhod2rm1oc"]
+
+[ext_resource type="Script" uid="uid://d1q5misfym7sb" path="res://hud.gd" id="1_37p78"]
+
+[node name="HUD" type="Control" unique_id=854108248]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_37p78")
+
+[node name="PainelTopo" type="PanelContainer" parent="." unique_id=1567503214]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="LabelMadeira" type="Label" parent="PainelTopo" unique_id=1082471577]
+layout_mode = 2
+
+[node name="LabelComida" type="Label" parent="PainelTopo" unique_id=878198174]
+layout_mode = 2
+
+[node name="LabelOuro" type="Label" parent="PainelTopo" unique_id=998037614]
+layout_mode = 2
+
+[node name="PainelRodape" type="PanelContainer" parent="." unique_id=2032055765]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="HBox" type="HBoxContainer" parent="PainelRodape" unique_id=1028039611]
+layout_mode = 2
+
+[node name="FotoUnidade" type="ColorRect" parent="PainelRodape/HBox" unique_id=446738508]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="PainelRodape/HBox" unique_id=38982232]
+layout_mode = 2
+
+[node name="NomeUnidade" type="Label" parent="PainelRodape/HBox/VBox" unique_id=460391027]
+layout_mode = 2
+
+[node name="VidaUnidade" type="ProgressBar" parent="PainelRodape/HBox/VBox" unique_id=722724804]
+layout_mode = 2

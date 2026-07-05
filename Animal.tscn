@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dn41bl14by3ep"]
+
+[ext_resource type="Script" uid="uid://cc3bx1riuqtde" path="res://animal.gd" id="1_l6hdp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_52r7t"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l6hdp"]
+
+[node name="Animal" type="CharacterBody3D" unique_id=1466154509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_l6hdp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1367916421]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_52r7t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=832368336]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_l6hdp")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1410731540]

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://oj7wakeel8l1"]
+
+[ext_resource type="Script" uid="uid://d1rg6ar7iui1a" path="res://construcao.gd" id="1_hdmen"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hdmen"]
+size = Vector3(2.2925415, 1.8544922, 3.5546265)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d6cog"]
+size = Vector3(2.3496094, 411.1001, 3.3027344)
+
+[node name="Construcao" type="StaticBody3D" unique_id=2050306120 groups=["construcao"]]
+script = ExtResource("1_hdmen")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=691657716]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14614868, 0.072753906, 0.1288147)
+mesh = SubResource("BoxMesh_hdmen")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=952678331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15618896, 204.70966, -0.011230469)
+shape = SubResource("BoxShape3D_d6cog")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=672167153]
+vertices = PackedVector3Array(-1.0248333, 0, -1.0295439, 1.0068552, 0, -1.0019712, 1.0063742, 0, 0.9749632, -0.9978246, 0, 0.9837122)
+affect_navigation_mesh = true

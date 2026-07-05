@@ -5,6 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://cupngbht3xv5b" path="res://Arvore.tscn" id="3_gejyx"]
 [ext_resource type="Script" uid="uid://d1q5misfym7sb" path="res://hud.gd" id="3_xywc0"]
 [ext_resource type="PackedScene" uid="uid://b7rlkjxnhd1iy" path="res://CentroDaCidade.tscn" id="4_5yunf"]
+[ext_resource type="Script" uid="uid://coq6k1lmfpmu0" path="res://construtor_ouro.gd" id="6_as70k"]
+[ext_resource type="PackedScene" uid="uid://dn41bl14by3ep" path="res://Animal.tscn" id="6_ftdas"]
+[ext_resource type="PackedScene" uid="uid://bpmjpygstygnt" path="res://Ouro.tscn" id="7_jlv7k"]
+[ext_resource type="PackedScene" uid="uid://oj7wakeel8l1" path="res://Construcao.tscn" id="7_ocdg6"]
+[ext_resource type="Script" uid="uid://bidp82l2tcpja" path="res://ConstrutorArvore.gd" id="8_jlv7k"]
 
 [sub_resource type="Environment" id="Environment_52r7t"]
 background_mode = 2
@@ -22,14 +27,16 @@ size = Vector2(100, 100)
 size = Vector3(100, 0.1, 100)
 
 [node name="Mundo" type="Node3D" unique_id=1388268822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010311425, 0, 3.0073514)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=442980656]
-transform = Transform3D(0.5991802, -0.5435158, -0.587855, 0.7879516, 0.53040725, 0.31273058, 0.14182852, -0.6505832, 0.74607366, 0, 0, 0)
+transform = Transform3D(0.08659883, -0.5983098, 0.79657143, 0.7879515, 0.53040737, 0.3127306, -0.6096171, 0.6005776, 0.5173718, -373.45166, 327.14008, 51.754642)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="DirectionalLight3D" unique_id=1193039402]
 environment = SubResource("Environment_52r7t")
 
 [node name="RtsCamera" parent="." unique_id=819886783 instance=ExtResource("1_pe05s")]
+cena_construcao = ExtResource("7_ocdg6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=463685550]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 5)
@@ -50,41 +57,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2336845, 0.045274675, 0.37
 [node name="Unidade4" parent="." unique_id=1504082689 groups=["unidades_jogador"] instance=ExtResource("2_ubi47")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.485558, -0.005960822, -0.27112603)
 
+[node name="Ouro" parent="." unique_id=1894375055 groups=["recursos"] instance=ExtResource("7_jlv7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.802171, -0.0038865805, 31.398285)
+quantidade_recurso = 40
+
 [node name="Arvore" parent="." unique_id=904657236 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 3.4340932, -0.016568542, 0.2480321)
-
-[node name="Arvore2" parent="." unique_id=193256493 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 5.8999004, -0.26389158, 0.2480321)
-
-[node name="Arvore3" parent="." unique_id=1924939191 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 3.4340932, -0.016568542, 2.2666068)
-
-[node name="Arvore4" parent="." unique_id=517922314 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 8.78721, -0.016568542, 0.2480321)
-
-[node name="Arvore5" parent="." unique_id=908570851 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 11.8227215, -0.036438346, 0.2480321)
-
-[node name="Arvore6" parent="." unique_id=1688604240 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 5.0326157, 0.26506925, 8.390846)
-
-[node name="Arvore7" parent="." unique_id=76187194 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, -8.337357, 0.18349272, 0.2480321)
-
-[node name="Arvore8" parent="." unique_id=117912466 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, -5.916172, 0.2124961, 0.2480321)
-
-[node name="Arvore9" parent="." unique_id=1683087724 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 19.119404, -0.08023763, 0.2480321)
-
-[node name="Arvore10" parent="." unique_id=1329803136 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, -13.945472, -0.31202364, -3.2693863)
-
-[node name="Arvore11" parent="." unique_id=1713037300 instance=ExtResource("3_gejyx")]
-transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 3.4340932, -0.41498744, -15.776093)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.107531, 0.39590073, 9.017624)
+quantidade_recurso = 40
 
 [node name="CentroDaCidade" parent="." unique_id=707274122 instance=ExtResource("4_5yunf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0191584, 0.009028196, -9.439905)
+
+[node name="Animal" parent="." unique_id=1466154509 instance=ExtResource("6_ftdas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.128343, 0.5, 0)
+quantidade_recurso = 40
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2132703628]
 navigation_mesh = SubResource("NavigationMesh_52r7t")
@@ -100,9 +86,71 @@ shape = SubResource("BoxShape3D_52r7t")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2098663534]
 
 [node name="HUD" type="Control" parent="CanvasLayer" unique_id=410587075]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 2.0
+offset_right = 1151.0
+offset_bottom = 648.0
 mouse_filter = 2
 script = ExtResource("3_xywc0")
+
+[node name="PainelTopo" type="PanelContainer" parent="CanvasLayer/HUD" unique_id=1414295284]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.5
+offset_right = 310.5
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="LabelMadeira" type="Label" parent="CanvasLayer/HUD/PainelTopo" unique_id=1485400002]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="LabelComida" type="Label" parent="CanvasLayer/HUD/PainelTopo" unique_id=202967925]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LabelOuro" type="Label" parent="CanvasLayer/HUD/PainelTopo" unique_id=824203806]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PainelRodape" type="PanelContainer" parent="CanvasLayer/HUD" unique_id=659244699]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -54.0
+offset_right = 251.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/HUD/PainelRodape" unique_id=575575329]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FotoUnidade" type="ColorRect" parent="CanvasLayer/HUD/PainelRodape/HBox" unique_id=702196711]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/HUD/PainelRodape/HBox" unique_id=1337015765]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NomeUnidade" type="Label" parent="CanvasLayer/HUD/PainelRodape/HBox/VBox" unique_id=937237746]
+layout_mode = 2
+
+[node name="VidaUnidade" type="ProgressBar" parent="CanvasLayer/HUD/PainelRodape/HBox/VBox" unique_id=827507541]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1546874975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97103786, 0.4462757, -0.5023457)
+script = ExtResource("6_as70k")
+numero_de_pepitas = 6
+
+[node name="Node3D2" type="Node3D" parent="." unique_id=1790451729]
+script = ExtResource("8_jlv7k")
