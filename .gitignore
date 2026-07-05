@@ -8,3 +8,29 @@ builds/
 # Arquivos de sistema comuns
 .DS_Store
 Thumbs.db
+
+# Godot import files and temporary artifacts
+.import/
+*.import
+
+# Godot per-file UID files (user-specific)
+*.uid
+
+# Mono/C# build artifacts
+.mono/
+*.csproj
+*.sln
+*.userprefs
+.vs/
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Swap / temp files
+*~
+*.swp
+*.tmp
+*.log
+tmp/
+temp/
